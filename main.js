@@ -9,36 +9,36 @@ const twenties = [];
 
 /********************
  * HELPER FUNCTIONS *
-********************/
+ ********************/
 
-const getRandomNumber = function(max) {
-    const rand = Math.random();
-    const range = rand * max;
-    const result = Math.ceil(range);
-    
-    return result;
-}
+const getRandomNumber = function (max) {
+  const rand = Math.random();
+  const range = rand * max;
+  const result = Math.ceil(range);
 
-const sortByNumber = function(arr) {
-  const byNumber = function(item1, item2) {
+  return result;
+};
+
+const sortByNumber = function (arr) {
+  const byNumber = function (item1, item2) {
     return item1 - item2;
-  }
+  };
 
   return arr.slice().sort(byNumber);
-}
+};
 
 /*******************
  * YOUR CODE BELOW *
  *******************/
 
 // images depending of roll dice number
-const singleImage = function(roll) {
+const singleImage = function (roll) {
   return `./images/d6/${roll}.png`;
-} 
+};
 
-const numbersImage = function(roll) {
+const numbersImage = function (roll) {
   return `./images/numbers/${roll}.png`;
-}
+};
 
 //Queries for buttons
 const single = document.querySelector("#d6-roll");
@@ -61,22 +61,21 @@ const blueSingleMedian = document.querySelector("#d12-rolls-median");
 const blackSingleMean = document.querySelector("#d20-rolls-mean");
 const blackSingleMedian = document.querySelector("#d20-rolls-median");
 
-
 /****************************
  * CLICK HANDLING FUNCTIONS *
-****************************/
-const rollSingle = function() {
+ ****************************/
+const rollSingle = function () {
   const roll = getRandomNumber(6);
   sixes.push(roll);
   const median = getMedian(sixes);
   const mean = getMean(sixes);
-  
+
   single.src = singleImage(roll);
   singleMean.innerText = mean;
   singleMedian.innerText = median;
-}
+};
 
-const doubleRoll = function() {
+const doubleRoll = function () {
   const roll1 = getRandomNumber(6);
   const roll2 = getRandomNumber(6);
   doubleSixes.push(roll1 + roll2);
@@ -86,10 +85,10 @@ const doubleRoll = function() {
   double1.src = singleImage(roll1);
   double2.src = singleImage(roll2);
   doublesMean.innerText = mean;
-  doublesMedian.innerText = median;  
-}
+  doublesMedian.innerText = median;
+};
 
-const blueRoll = function() {
+const blueRoll = function () {
   const roll4 = getRandomNumber(12);
   twelves.push(roll4);
   const median = getMedian(twelves);
@@ -98,22 +97,22 @@ const blueRoll = function() {
   blueSingle.src = numbersImage(roll4);
   blueSingleMean.innerText = mean;
   blueSingleMedian.innerText = median;
-}
+};
 
-const blackRoll = function() {
+const blackRoll = function () {
   const roll5 = getRandomNumber(20);
   twenties.push(roll5);
   const median = getMedian(twenties);
   const mean = getMean(twenties);
 
   blackSingle.src = numbersImage(roll5);
-  blackSingleMean = mean;
-  blackSingleMedian = median;
-}
+  blackSingleMean.innerText = mean;
+  blackSingleMedian.innerText = median;
+};
 /******************
  * RESET FUNCTION *
  ******************/
-  const reset = function() {
+const reset = function () {
   sixes.splice(0);
   doubleSixes.splice(0);
   twelves.splice(0);
@@ -121,7 +120,7 @@ const blackRoll = function() {
 
   single.src = "./images/start/d6.png";
   double1.src = "./images/start/d6.png";
-  double2.src= "./images/start/d6.png";
+  double2.src = "./images/start/d6.png";
   blueSingle.src = "./images/start/d12.jpeg";
   blackSingle.src = "./images/start/d20.jpg";
 
@@ -133,7 +132,7 @@ const blackRoll = function() {
   blueSingleMedian.innerText = "NA";
   blackSingleMean.innerText = "NA";
   blackSingleMedian.innerText = "NA";
-}
+};
 
 /*******************
  * EVENT LISTENERS *
@@ -147,15 +146,15 @@ resetButton.addEventListener("click", reset);
 /****************
  * MATH SECTION *
  ****************/
-const getMean = function(rolls) {
+const getMean = function (rolls) {
   let total = 0;
   for (const roll of rolls) {
     total += roll;
   }
   return (total / rolls.length).toFixed(2);
-}
+};
 
-const getMedian = function(rolls) {
+const getMedian = function (rolls) {
   const sorted = sortByNumber(rolls);
   const mid = Math.floor(sorted.length / 2);
   if (sorted.length % 2 === 0) {
@@ -163,4 +162,4 @@ const getMedian = function(rolls) {
   } else {
     return sorted[mid].toFixed(2);
   }
-}
+};
