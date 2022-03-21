@@ -31,7 +31,7 @@ const sortByNumber = function (arr) {
  * YOUR CODE BELOW *
  *******************/
 
-// images depending of roll dice number
+//  images depending of roll dice number
 const singleImage = function (roll) {
   return `./images/d6/${roll}.png`;
 };
